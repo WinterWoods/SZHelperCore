@@ -630,6 +630,7 @@ namespace SZHelperCore
         /// </summary>
         public static String Get(Char ch)
         {
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             // 拉丁字符            
             if (ch <= '\x00FF') return ch.ToString();
 
