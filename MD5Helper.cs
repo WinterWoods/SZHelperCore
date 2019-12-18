@@ -50,13 +50,13 @@ namespace SZHelperCore
             Random r = new Random();
             strRandom = ((char)(r.Next(65, 65 + 26))).ToString() + ((char)(r.Next(65, 65 + 26))).ToString() + ((char)(r.Next(65, 65 + 26))).ToString();
 
-            return strRandom + StrMD5(strRandom + txtPwd);//设定加密方式，也可以在此进行多次Md5加强密码安全度
+            return (strRandom + StrMD5(strRandom + txtPwd)).Substring(0,32);//设定加密方式，也可以在此进行多次Md5加强密码安全度
         }
         public static bool PwdIsRight(string sqlPwd, string txtPwd)
         {
             string str = sqlPwd.Substring(0, 3);
             string tmp = str + StrMD5(str + txtPwd);
-            return sqlPwd.ToLower() == tmp.ToLower() ? true : false;
+            return sqlPwd.ToLower() == tmp.Substring(0, 32).ToLower() ? true : false;
         }
     }
 }

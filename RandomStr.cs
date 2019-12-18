@@ -54,5 +54,24 @@ namespace SZHelperCore
             }
             return str;
         }
+        /// <summary>
+        /// 升级1e内不重复的字符串
+        /// </summary>
+        /// <returns></returns>
+        public static string GenerateStringID()
+        {
+            long i = 1;
+            foreach (byte b in Guid.NewGuid().ToByteArray())
+            {
+                i *= ((int)b + 1);
+            }
+            return string.Format("{0:x}", i - DateTime.Now.Ticks);
+
+        }
+        public static long GenerateIntID()
+        {
+            byte[] buffer = Guid.NewGuid().ToByteArray();
+            return BitConverter.ToInt64(buffer, 0);
+        }
     }
 }
