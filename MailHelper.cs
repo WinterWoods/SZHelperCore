@@ -15,13 +15,19 @@ namespace SZHelperCore
 
             SmtpClient smtpClient = new SmtpClient();
 
-            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;//指定电子邮件发送方式
+            smtpClient.EnableSsl = enableSsl;
 
-            smtpClient.Host = smtpserver;//指定SMTP服务器
+            smtpClient.UseDefaultCredentials = false;//先设置
+
 
             smtpClient.Credentials = new NetworkCredential(userName, pwd);//用户名和密码
 
-            smtpClient.EnableSsl = enableSsl;
+            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;//指定电子邮件发送方式
+            smtpClient.Host = smtpserver;//指定SMTP服务器
+
+            
+
+            
 
             MailAddress fromAddress = new MailAddress(fromMail, nickName);
 
