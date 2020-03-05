@@ -13,11 +13,11 @@ namespace SZHelperCore
     /// </summary>
     public class DrawValidationCode
     {
-        private int letterWidth = 16;//单个字体的宽度范围  
-        private int letterHeight = 22;//单个字体的高度范围  
-        int randAngle = 45;// 随机转动角度
-        private char[] chars = "0123456789".ToCharArray();
-        private string[] fonts = { "Arial", "Georgia" };
+        private static int letterWidth = 16;//单个字体的宽度范围  
+        private static int letterHeight = 22;//单个字体的高度范围  
+        static int randAngle = 45;// 随机转动角度
+        private static char[] chars = "0123456789".ToCharArray();
+        private static string[] fonts = { "Arial", "Georgia" };
         /// <summary>  
         /// 产生波形滤镜效果  
         /// </summary>  
@@ -29,7 +29,7 @@ namespace SZHelperCore
         ///CreateImage(str_ValidateCode);
         /// </summary>
         /// <param name="checkCode"></param>
-        public Bitmap CreateImage(string checkCode)
+        public static Bitmap CreateImage(string checkCode)
         {
             int int_ImageWidth = checkCode.Length * letterWidth;
             Random newRandom = new Random();
@@ -111,7 +111,7 @@ namespace SZHelperCore
         /// <param name="nMultValue">波形的幅度倍数，越大扭曲的程度越高，一般为3</param>  
         /// <param name="dPhase">波形的起始相位，取值区间[0-2*PI)</param>  
         /// <returns></returns>  
-        public System.Drawing.Bitmap TwistImage(Bitmap srcBmp, bool bXDir, double dMultValue, double dPhase)
+        private static System.Drawing.Bitmap TwistImage(Bitmap srcBmp, bool bXDir, double dMultValue, double dPhase)
         {
             System.Drawing.Bitmap destBmp = new Bitmap(srcBmp.Width, srcBmp.Height);
             // 将位图背景填充为白色  
@@ -142,7 +142,7 @@ namespace SZHelperCore
             return destBmp;
         }
 
-        public Color GetRandomColor()
+        private static Color GetRandomColor()
         {
             Random RandomNum_First = new Random((int)DateTime.Now.Ticks);
             System.Threading.Thread.Sleep(RandomNum_First.Next(50));
@@ -155,7 +155,7 @@ namespace SZHelperCore
         }
 
         //  生成随机数字字符串  
-        public string GetRandomNumberString(int int_NumberLength)
+        public static string GetRandomNumberString(int int_NumberLength)
         {
             Random random = new Random();
             string validateCode = string.Empty;
