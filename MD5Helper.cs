@@ -42,7 +42,7 @@ namespace SZHelperCore
                 throw;
             }
         }
-        public static string GetEncMD5(string txtPwd)
+        public static string GetPasswordMD5(string txtPwd)
         {
             string strRandom;
 
@@ -52,7 +52,7 @@ namespace SZHelperCore
 
             return (strRandom + StrMD5(strRandom + txtPwd)).Substring(0,32);//设定加密方式，也可以在此进行多次Md5加强密码安全度
         }
-        public static bool PwdIsRight(string sqlPwd, string txtPwd)
+        public static bool PasswordIsRight(string sqlPwd, string txtPwd)
         {
             string str = sqlPwd.Substring(0, 3);
             string tmp = str + StrMD5(str + txtPwd);
