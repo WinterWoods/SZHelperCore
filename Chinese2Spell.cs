@@ -739,5 +739,10 @@ namespace SZHelperCore
 
             return (chs + "$" + chsHead + "$" + value).ToUpper();
         }
+        public static string GetSearchStrs(params string[] text)
+        {
+           return  Chinese2Spell.GetSearchStr(string.Join("$", text));
+        }
+
     }
 }
