@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace SZHelperCore
@@ -33,7 +34,9 @@ namespace SZHelperCore
             var response = httpclient.GetAsync(url).Result;
             if (response.IsSuccessStatusCode)
             {
-                Stream myResponseStream = response.Content.ReadAsStreamAsync().Result;
+                var httpContent = response.Content;
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                Stream myResponseStream = httpContent.ReadAsStreamAsync().Result;
                 StreamReader myStreamReader = new StreamReader(myResponseStream, encoding);
                 result = myStreamReader.ReadToEnd();
                 myStreamReader.Close();
